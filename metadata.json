@@ -1,0 +1,5 @@
+{
+  "name": "MD to Word Converter",
+  "description": "A tool to convert Markdown files to formatted Word documents with specific styling requirements.",
+  "requestFramePermissions": []
+}
