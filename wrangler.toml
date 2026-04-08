@@ -1,6 +1,0 @@
-name = "mdtow"
-pages_build_output_dir = ".next/static"
-
-[env.production]
-name = "mdtow"
-
