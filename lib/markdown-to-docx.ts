@@ -12,6 +12,7 @@ import {
   BorderStyle,
   LevelFormat,
   PageBreak,
+  StyleLevel,
 } from "docx";
 import { unified } from "unified";
 import remarkParse from "remark-parse";
@@ -241,6 +242,7 @@ function processBlockNode(node: any, level: number = 0, ctx: ConversionContext, 
           style: forceCenter ? undefined : `Heading${depth}`,
           alignment: forceCenter ? AlignmentType.CENTER : AlignmentType.LEFT,
           spacing: headingSpacing,
+          outlineLevel: forceCenter ? undefined : depth - 1,
         })
       );
       break;
@@ -285,6 +287,7 @@ function processBlockNode(node: any, level: number = 0, ctx: ConversionContext, 
                       style: forceCenter ? undefined : `Heading${depth}`,
                       alignment: forceCenter ? AlignmentType.CENTER : AlignmentType.LEFT,
                       spacing: pseudoHeadingSpacing,
+                      outlineLevel: forceCenter ? undefined : depth - 1,
                     })
                   );
                   // Reset pseudo list state on heading
@@ -816,18 +819,19 @@ export async function convertMarkdownToDocx(markdown: string): Promise<Blob> {
 
   // 3. Add TOC
   docChildren.push(
-    new TableOfContents("", {
+    new TableOfContents("点击右键更新目录", {
       hyperlink: true,
-      styles: [
-        { styleId: "Heading1", level: 1 },
-        { styleId: "Heading2", level: 2 },
-        { styleId: "Heading3", level: 3 },
-        { styleId: "Heading4", level: 4 },
-        { styleId: "Heading5", level: 5 },
-        { styleId: "Heading6", level: 6 },
-        { styleId: "Heading7", level: 7 },
-        { styleId: "Heading8", level: 8 },
-        { styleId: "Heading9", level: 9 },
+      headingStyleRange: "1-9",
+      stylesWithLevels: [
+        new StyleLevel("Heading1", 1),
+        new StyleLevel("Heading2", 2),
+        new StyleLevel("Heading3", 3),
+        new StyleLevel("Heading4", 4),
+        new StyleLevel("Heading5", 5),
+        new StyleLevel("Heading6", 6),
+        new StyleLevel("Heading7", 7),
+        new StyleLevel("Heading8", 8),
+        new StyleLevel("Heading9", 9),
       ],
     })
   );

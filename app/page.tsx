@@ -88,12 +88,11 @@ export default function Home() {
       >
         <div className="text-center mb-6 shrink-0">
           <h1 
-            className="text-3xl md:text-5xl font-bold text-gray-800 mb-2 tracking-tight notranslate"
-            suppressHydrationWarning
+            className="text-3xl md:text-5xl font-bold text-gray-800 mb-2 tracking-tight"
           >
             Markdown 转 <span className="text-blue-600">Word</span>
           </h1>
-          <p className="text-base text-gray-600 max-w-2xl mx-auto notranslate" suppressHydrationWarning>
+          <p className="text-base text-gray-600 max-w-2xl mx-auto">
             优雅的转换体验，专业级排版。自动应用宋体、1.5倍行距和首行缩进。
           </p>
         </div>
