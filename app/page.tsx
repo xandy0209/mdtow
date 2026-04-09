@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Upload, FileText, Download, Check, RefreshCw, PenLine } from 'lucide-react';
+import { motion } from 'motion/react';
+import { Upload, FileText, Download, RefreshCw, PenLine } from 'lucide-react';
 import { convertMarkdownToDocx } from '@/lib/markdown-to-docx';
 
 export default function Home() {
@@ -27,14 +27,14 @@ export default function Home() {
     e.preventDefault();
     setIsDragging(false);
     const file = e.dataTransfer.files[0];
-    if (file) {
-        if (!file.name.endsWith('.md')) {
-            alert('Please upload a Markdown (.md) file.');
-            return;
+        if (file) {
+            if (!file.name.endsWith('.md')) {
+                console.error('Please upload a Markdown (.md) file.');
+                return;
+            }
+            processFile(file);
         }
-        processFile(file);
-    }
-  };
+    };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -67,7 +67,6 @@ export default function Home() {
       document.body.removeChild(a);
     } catch (error) {
       console.error('Conversion failed:', error);
-      alert('Conversion failed. Please check the console for details.');
     } finally {
       setIsConverting(false);
     }
